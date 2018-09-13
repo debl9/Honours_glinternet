@@ -6,7 +6,8 @@ regression and modelling pairwise interactions using the `GLINTERNET` package. T
 codes for each section 
 
 ## 1. Data Wrangling 
-Codes for data cleaning and structuring it into continuous and categorical variables. \\
+Codes for data cleaning and structuring it into continuous and categorical variables.
+
 [Data wrangling codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code1_data_wrangling.R)
 
 ## 2. VIF 
