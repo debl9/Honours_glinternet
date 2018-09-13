@@ -140,7 +140,7 @@ X_impute_final$TOT_LIABILITY_OTH_FIN_INSTITUT <- X_out_impute$TOT_LIABILITY_OTH_
 X_impute_final$AMT_BEING_REFINANCED_1 <- X_out_impute$AMT_BEING_REFINANCED_1
 X_impute_final$NUM_OTH_FIN_INSTITUTE_ACCTS <- X_out_impute$NUM_OTH_FIN_INSTITUTE_ACCTS
 
-# Filter out the observations that have been approved by the bank
+# Retain only the observations that have been approved by the bank
 X_impute_final2 <- dplyr::filter(X_impute_final, Final_Decision_Summary == "APPROVE")
 
 # CONTINUOUS/CATEGORICAL STRUCTURE ----------------------------------------
@@ -201,15 +201,13 @@ X_categ2 %>%
                                                        `IN PROCESS` = "2"),
          SEC_FLAG = dplyr::recode_factor(SEC_FLAG, `SEC`="0", `UNSEC`="1")) -> X_categ3
 
-X_categ4 <- droplevels(X_categ3) # clears unused factors
+X_categ4 <- droplevels(X_categ3) # removes unused factors
 X_categ5 <- sapply(X_categ4, function(x) as.numeric(as.character(x)))  
 
-# continuous first then categorical variables
+# Levels within corresponding categorical variables
 numLevels <- c(rep(1, ncol(X_cont2)), 
                unname(sapply(X_categ4[,sapply(X_categ4, is.factor)], nlevels)))
 
-
-# Filter out declined loans 
 X_pred <- cbind(X_cont2, X_categ5)
 
 # Remove parameter - Final Decision Summary
