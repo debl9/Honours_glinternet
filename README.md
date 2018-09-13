@@ -7,7 +7,7 @@ used in data cleaning, building models and analysis. Outputs can be found in the
 [Figures](https://github.com/debl9/Honours_glinternet/tree/master/Figures).
 
 ## 1. Data Wrangling 
-Codes for data cleaning and structuring it into continuous and categorical variables.
+Codes for data cleaning, imputation and structuring it into continuous and categorical variables. 
 
 [Data wrangling codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code1_data_wrangling.R)
 

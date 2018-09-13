@@ -131,7 +131,7 @@ X_impute <- mice(X5[, c("AMT_BEING_REFINANCED_2",
                         "AMT_BEING_REFINANCED_1", 
                         "NUM_OTH_FIN_INSTITUTE_ACCTS")], m=2, maxit = 3)
 
-# Exports the imputed values for corresponding variables
+# Exports the imputed values
 X_out_impute <- complete(X_impute)
 X_impute_final <- X5
 
@@ -213,3 +213,8 @@ X_pred <- cbind(X_cont2, X_categ5)
 # Remove parameter - Final Decision Summary
 X_approved <- X_pred[,-which(colnames(X_pred) == "Final_Decision_Summary")]
 numLevels <- numLevels[-which(colnames(X_pred) == "Final_Decision_Summary")]
+
+
+# SAVE --------------------------------------------------------------------
+
+save(X_approved, numLevels, file = "model_data.rda")

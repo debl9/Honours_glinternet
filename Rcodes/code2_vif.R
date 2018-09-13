@@ -4,6 +4,7 @@
 
 library(usdm)
 library(dplyr)
+load("model_data.rda")
 
 # Separate into categorical and continuous variables
 designX <- cbind(X_approved[, -which(names(X_approved) %in% colnames(X_categ4))], X_categ4)
@@ -15,3 +16,8 @@ var.vif <- as.character(dplyr::filter(vif.data, vif.data[,2] < 4)$Variables)
 designX2_cont <- dplyr::select(designX, var.vif)
 designX2contcat <- cbind(designX2_cont, X_categ4)
 designX3 <- designX2contcat
+
+
+# SAVE --------------------------------------------------------------------
+
+save(designX, designX3, file = "vif.rda")
