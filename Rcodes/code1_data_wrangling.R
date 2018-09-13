@@ -1,11 +1,11 @@
 # DATA WRANGLING ----------------------------------------------------------
 
 require(dplyr)      # data manipulation
-require(lubridate)  # structuring time
+require(lubridate)  # structuring dates and times
 require(zoo)        # indexing observations
 require(stringr)    # character manipulation
 require(dmm)        # used for factoring data
-require(glinternet) # fitting model 
+require(glinternet) # fitting glinternet model 
 require(cleandata)  # inspecting NAs in data
 require(mice)       # multiple imputation
 
@@ -35,9 +35,6 @@ west <- dplyr::select(westpac1, AGE_OF_APP_1, APPL_DATE:DEFAULT_FLAG, OPENED_DAT
 west2 <- replace_99NA(west)
 west2$APPL_DATE <- extract.date(west2$APPL_DATE)
 
-# Target variable Y (0: non-defaults, 1: defaults)
-Y <- west2$DEFAULT_FLAG
-
 # predictor matrix X
 X <- west2[,-133] # (removing default indicator)
 
@@ -48,8 +45,6 @@ factor.cols = c("CURR_RESIDENCY_POSTCODE_1", "NUM_APPS", "NUM_BNKRPT_1",
                 "SECURED_LOAN_PURPOSE_CODE", "WORST_APPL_DELQ_STATUS")
 
 X[factor.cols] <- lapply(X[factor.cols], factor)
-
-str(X, list.len=ncol(X))
 
 # Drop these variables with mostly 0 entries
 X %>% 
