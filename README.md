@@ -2,8 +2,8 @@
 
 ## Introduction
 This page contains the supporting content in my Honours statistics thesis regarding hierarchical group-lasso 
-regression and modelling pairwise interactions using the `GLINTERNET` package. The following includes the R
-codes for each section 
+regression and modelling pairwise interactions. The following includes the R codes used for data cleaning and
+the application of `GLINTERNET` to a credit loan dataset. 
 
 ## 1. Data Wrangling 
 Codes for data cleaning and structuring it into continuous and categorical variables.
