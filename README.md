@@ -3,7 +3,8 @@
 ## Introduction
 This page contains the supporting content in my Honours statistics thesis regarding hierarchical group-lasso 
 regression and modelling pairwise interactions within a credit loan dataset. Included are all of the R codes 
-used in data cleaning, building models, analysis and outputs.
+used in data cleaning, building models and analysis. Outputs can be found in the folder 
+[Figures](https://github.com/debl9/Honours_glinternet/tree/master/Figures).
 
 ## 1. Data Wrangling 
 Codes for data cleaning and structuring it into continuous and categorical variables.
