@@ -1,7 +1,4 @@
-# Appendix for Honours Project - GLINTERNET
+# Appendix for Honours Project - Hierarchical Group Lasso Regularisation & GLINTERNET
 
-```{r}
-read.table
-
-```
+This page contains the supporting contents to my Honours project
 
