@@ -7,7 +7,7 @@ require(stringr)    # character manipulation
 require(dmm)        # used for factoring data
 require(glinternet) # fitting glinternet model 
 require(cleandata)  # inspecting NAs in data
-require(mice)       # multiple imputation
+require(mice)       # data imputation
 
 # Data Cleaning/Functions ------------------------------------------------
 # Read in the data
