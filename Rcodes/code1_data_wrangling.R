@@ -34,28 +34,28 @@ replace_99NA <- function(data) {
 west <- dplyr::select(westpac1, AGE_OF_APP_1, APPL_DATE:DEFAULT_FLAG, OPENED_DATE, CLOSED_DATE)
 west2 <- replace_99NA(west)
 west2$APPL_DATE <- extract.date(west2$APPL_DATE)
+is.na(west2$PHONE_APPL_IND) <- west2$PHONE_APPL_IND == ''
 
-# predictor matrix X
+# Design matrix X
 X <- west2[,-133] # (removing default indicator)
 
 
-# change additional variables into factors
+# Change additional variables into factors
 factor.cols = c("CURR_RESIDENCY_POSTCODE_1", "NUM_APPS", "NUM_BNKRPT_1",
                 "NUM_EXIST_WBC_ACCTS", "NUM_EXIST_WBC_MTGE_ACCTS",
                 "SECURED_LOAN_PURPOSE_CODE", "WORST_APPL_DELQ_STATUS")
 
 X[factor.cols] <- lapply(X[factor.cols], factor)
 
-# Drop these variables with mostly 0 entries
+# Deleting variables with mostly 0 entries or NAs
 X %>% 
   dplyr::select(-c(INV_ASSETS_AMT_1, INV_ASSETS_AMT_2, OWN_FUNDS_TOT_COST, 
                    PERS_LN_LIABILITY_1, 
                    PERS_LN_LIABILITY_2, VEHICLE_YEAR, LEND_VAL_1,
                    NUM_EXIST_WBC_MTGE_ACCTS, TIME_AT_PREV_ADDR_2, 
                    AMT_BEING_REFINANCED_3, AMT_BEING_REFINANCED_4,
-                   AMT_BEING_REFINANCED_5)) -> X2
-
-is.na(X2$PHONE_APPL_IND) <- X2$PHONE_APPL_IND == ''
+                   AMT_BEING_REFINANCED_5, ORIG_DECSN, NUM_DISHON_CHQS_L6M,
+                   VEHICLE_NEW_USED_IND, TIME_AT_CURR_ADDR_2, PHONE_APPL_IND)) -> X2
 
 # Re-code occupation groups
 conv.occup <- function (data) {
@@ -94,7 +94,7 @@ X3A <- dplyr::filter(X3, Final_Decision_Summary == "APPROVE")
 # Observe the number of NA in dataset
 cleandata::inspect_na(X3A)/nrow(X3A)
 
-# Imputation using mean/mode
+# Mean Imputation
 X4 <- impute_mean(X3A, cols = c("WBC_MTGE_LIABILITY_1", "CC_LIABILITY_1", 
                                         "MTH_PAYE_INC_2", "MTH_MTGE_PYMT_2", 
                                         "MTH_CC_PAY_2", "WORST_DAYS_IN_EXCESS_AT_APPL",
@@ -119,32 +119,33 @@ X4 <- impute_mean(X3A, cols = c("WBC_MTGE_LIABILITY_1", "CC_LIABILITY_1",
                                         "OTH_LN_LIABILITY_1", "MTH_OTH_INC_1",
                                         "NET_ASSETS_VAL_1", "TOT_NET_ASSETS", "TIME_WITH_BANK_1"))
 
+# Mode Imputation
 X5 <- impute_mode(X4, cols = c("CURR_RESIDENCY_STATE_1", "OCCUPATION_CODE_1",
                                "RESIDNTL_STATUS_1", "EMPLOYMENT_STATUS_1"))
 
 inspect_na(X5)
 
-# Multiple imputation for these variables
-X6 <- dplyr::select(X5, -c(TIME_AT_CURR_ADDR_2, PHONE_APPL_IND))
-X_impute <- mice(X6[, c("VEHICLE_NEW_USED_IND", 
-                        "NUM_DISHON_CHQS_L6M", "AMT_BEING_REFINANCED_2", 
+# Multiple Imputation
+X_impute <- mice(X5[, c("AMT_BEING_REFINANCED_2", 
                         "TOT_LIABILITY_OTH_FIN_INSTITUT", 
                         "AMT_BEING_REFINANCED_1", 
                         "NUM_OTH_FIN_INSTITUTE_ACCTS")], m=2, maxit = 3)
 
-# mice::complete() exports the imputed columns to obtain the final dataframe
+# Exports the imputed values for corresponding variables
 X_out_impute <- complete(X_impute)
-X_impute_final <- X6
+X_impute_final <- X5
 
-X_impute_final$VEHICLE_NEW_USED_IND <- X_out_impute$VEHICLE_NEW_USED_IND
-X_impute_final$NUM_DISHON_CHQS_L6M <- X_out_impute$NUM_DISHON_CHQS_L6M
 X_impute_final$AMT_BEING_REFINANCED_2 <- X_out_impute$AMT_BEING_REFINANCED_2
 X_impute_final$TOT_LIABILITY_OTH_FIN_INSTITUT <- X_out_impute$TOT_LIABILITY_OTH_FIN_INSTITUT
 X_impute_final$AMT_BEING_REFINANCED_1 <- X_out_impute$AMT_BEING_REFINANCED_1
 X_impute_final$NUM_OTH_FIN_INSTITUTE_ACCTS <- X_out_impute$NUM_OTH_FIN_INSTITUTE_ACCTS
 
+# Filter out the observations that have been approved by the bank
+X_impute_final2 <- dplyr::filter(X_impute_final, Final_Decision_Summary == "APPROVE")
 
 # CONTINUOUS/CATEGORICAL STRUCTURE ----------------------------------------
+# This section of code re-structures the data into a form that 
+# required for the GLINTERNET package
 
 Y <- X_impute_final2$DEFAULT_FLAG
 X_impute_final2 <- dplyr::select(X_impute_final2, -DEFAULT_FLAG)
@@ -186,8 +187,6 @@ X_categ2 %>%
                                                   `A`="0", `B`="1", `C`="2", `D`="3",
                                                   `E`="4", `F`="5", `G`="6", `H`="7",
                                                   `N`="8"),
-         ORIG_DECSN = dplyr::recode_factor(ORIG_DECSN, `APP`="0", `BRA`="1", `DEC`="2",
-                                           `INC`="3", `PEN`="4", `PLR`="5", `VER`="6"),
          RESIDNTL_STATUS_1 = dplyr::recode_factor(RESIDNTL_STATUS_1,
                                                   `B`="0", `C`="1", `D`="2", `H`="3",
                                                   `O`="4", `P`="5", `R`="6", `S`="7"),
@@ -197,7 +196,6 @@ X_categ2 %>%
          SECURED_LOAN_PURPOSE_CODE = dplyr::recode_factor(SECURED_LOAN_PURPOSE_CODE,
                                                           `1`="0", `2`="1", `4`="2",
                                                           `7`="3", `8`="4"),
-         VEHICLE_NEW_USED_IND = dplyr::recode_factor(VEHICLE_NEW_USED_IND, `N`="0", `U` = "1"),
          Final_Decision_Summary = dplyr::recode_factor(Final_Decision_Summary,
                                                        `APPROVE` = "0", `DECLINE` = "1",
                                                        `IN PROCESS` = "2"),
@@ -215,11 +213,5 @@ numLevels <- c(rep(1, ncol(X_cont2)),
 X_pred <- cbind(X_cont2, X_categ5)
 
 # Remove parameter - Final Decision Summary
-X_approved <- X_pred[,-115]
-numLevels <- numLevels[-115]
-
-# Remove NA variables -----------------------------------------------------
-
-X_impute_final2 <- dplyr::select(X_impute_final, -c(VEHICLE_NEW_USED_IND, 
-                                                    TIME_AT_CURR_ADDR_2, 
-                                                    VEHICLE_NEW_USED_IND))
+X_approved <- X_pred[,-which(colnames(X_pred) == "Final_Decision_Summary")]
+numLevels <- numLevels[-which(colnames(X_pred) == "Final_Decision_Summary")]
