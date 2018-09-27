@@ -31,5 +31,5 @@ We used this package to fit a logistic model with overlapping group lasso to unc
 ## 5. Analysis 
 For each value of lambda's, we observe the mean AUC (area under the ROC). We select the lambda within 1 standard error
 of the maximum lambda. 
-
+[Code](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
 ![GitHub Logo](/Figures/my_mean_auc.png)
