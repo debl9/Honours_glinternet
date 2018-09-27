@@ -29,9 +29,7 @@ We used this package to fit a logistic model with overlapping group lasso to unc
 [GLINTERNET variable selection/bootstrapping](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
 
 ## 5. Analysis 
-For each value of $lambda$s, we observe the mean AUC (area under the ROC). We select the $lambda$ within 1 standard error
-of the maximum $lambda$. 
+For each value of lambda's, we observe the mean AUC (area under the ROC). We select the lambda within 1 standard error
+of the maximum lambda. 
 
-```{r fig1, echo=FALSE, fig.cap="Mean AUC for all Lambda values"}
-knitr::include_graphics("Figures/my_mean_auc.png")
-```
+![GitHub Logo](/Figures/my_mean_auc.png)
