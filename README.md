@@ -19,9 +19,11 @@ variable and reduce the dimensions of the dataset.
 
 ## 3. GLMNET 
 Applied generalised lasso regularisation to the the subset dataset, to select the significant main effect 
-variables. 
+variables.
 
 [GLMNET codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code3_glmnet.R)
+
+![GitHub Logo](/Figures/glmnet_lasso.png)
 
 ## 4. GLINTERNET
 We used this package to fit a logistic model with overlapping group lasso to uncover underlying interactions.
@@ -29,12 +31,15 @@ We used this package to fit a logistic model with overlapping group lasso to unc
 [GLINTERNET variable selection/bootstrapping](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
 
 ## 5. Analysis 
- - Mean AUC
+### Mean AUC
+
 For each value of lambda's, we observe the mean AUC (area under the ROC). We select the lambda within 1 standard error
 of the maximum lambda. 
 
-[Code](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
+[Codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
 
 ![GitHub Logo](/Figures/my_mean_auc.png)
 
-- GLINTERNET ROC of 5 Bootstrap Samples
+### GLINTERNET ROC of 5 Bootstrap Samples
+
+![GitHub Logo](/Figures/bs5_roc.png)
