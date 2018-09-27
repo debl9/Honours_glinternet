@@ -24,6 +24,8 @@ variables.
 [GLMNET codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code3_glmnet.R)
 
 ## 4. GLINTERNET
-We used this package to fit a logistic model with overlapping group lasso to uncover underlying interactions. 
+We used this package to fit a logistic model with overlapping group lasso to uncover underlying interactions.
+
+[GLINTERNET variable selection/bootstrapping](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
 
 ## 5. Analysis 

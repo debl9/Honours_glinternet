@@ -5,10 +5,7 @@
 library(glinternet)
 library(varhandle)
 load("model_data2.rda")
-
-
-load("glint_varselect.rda")
-load("full_glint_new.rda")
+load("vif_glmnet.rda")
 
 # Convert categorical variables, dataframe to matrix required for GLINTERNET
 vifglmnet.matrix2 <- data.matrix(varhandle::unfactor(vifglmnet.matrix))
