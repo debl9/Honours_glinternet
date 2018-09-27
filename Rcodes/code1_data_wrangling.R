@@ -31,13 +31,13 @@ replace_99NA <- function(data) {
 }
 
 # Remove variables related to post-default
-west <- dplyr::select(westpac1, AGE_OF_APP_1, APPL_DATE:DEFAULT_FLAG, OPENED_DATE, CLOSED_DATE)
-west2 <- replace_99NA(west)
-west2$APPL_DATE <- extract.date(west2$APPL_DATE)
-is.na(west2$PHONE_APPL_IND) <- west2$PHONE_APPL_IND == ''
+westdf <- dplyr::select(westpac1, AGE_OF_APP_1, APPL_DATE:DEFAULT_FLAG, OPENED_DATE, CLOSED_DATE)
+westdf2 <- replace_99NA(westdf)
+westdf2$APPL_DATE <- extract.date(westdf2$APPL_DATE)
+is.na(westdf2$PHONE_APPL_IND) <- westdf2$PHONE_APPL_IND == ''
 
 # Design matrix X
-X <- west2[,-133] # (removing default indicator)
+X <- westdf2[,-133] # (removing default indicator)
 
 
 # Change additional variables into factors
@@ -86,7 +86,7 @@ X3$OPENED_DATE <- as.Date(X3$OPENED_DATE, "%d%b%Y")
 X3$CLOSED_DATE <- as.Date(X3$CLOSED_DATE, "%d%b%Y")
 
 # Combine the default into X3
-X3$DEFAULT_FLAG <- Y
+X3$DEFAULT_FLAG <- westpac1$DEFAULT_FLAG
 
 # Select observations that have been APPROVE[D]
 X3A <- dplyr::filter(X3, Final_Decision_Summary == "APPROVE")
@@ -141,7 +141,7 @@ X_impute_final$AMT_BEING_REFINANCED_1 <- X_out_impute$AMT_BEING_REFINANCED_1
 X_impute_final$NUM_OTH_FIN_INSTITUTE_ACCTS <- X_out_impute$NUM_OTH_FIN_INSTITUTE_ACCTS
 
 # Retain only the observations that have been approved by the bank
-X_impute_final2 <- dplyr::filter(X_impute_final, Final_Decision_Summary == "APPROVE")
+X_impute_final2 <-X_impute_final
 
 # CONTINUOUS/CATEGORICAL STRUCTURE ----------------------------------------
 # This section of code re-structures the data into a form that 
