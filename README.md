@@ -40,7 +40,7 @@ of the maximum lambda.
 
 ![GitHub Logo](/Figures/mean_auc2.png)
 
-### GLINTERNET ROC of 5 Bootstrap Samples
+### GLINTERNET AUC of ROC for 5 Bootstrap Samples
 
 ![GitHub Logo](/Figures/bs_roc2.png)
 
@@ -49,3 +49,13 @@ of the maximum lambda.
 [Codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code6_extractcoefs_analysis.R)
 
 ![Percentiles](/Figures/bootstrap_percentiles.PNG)
+
+### Significant Variables selected via GLINTERNET
+
+- Main Effects
+
+![main_effects](/Figures/main_effects.PNG)
+
+- Interaction Effects
+
+![Interactions](/Figures/interaction_effects.PNG)
