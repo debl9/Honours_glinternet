@@ -42,6 +42,7 @@ bootglinternet <- function (X, Y, numLevels, B=50, nLambdas=20, maxLambda=4.0546
     bootsamps <- sample(x = 1:n, size = n, replace = TRUE)
     fit <- glinternet::glinternet(X = X[bootsamps,], Y = Y[bootsamps],
                                   lambda = lambdas, numLevels = numLevels, 
+                                  family = "binomial",
                                   nLambda = nLambdas, verbose = T)
     notbootsamps <- (1:n)[!(1:n) %in% bootsamps]
     ypred <- predict(fit, X = X[notbootsamps,], type = "link")

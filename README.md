@@ -38,8 +38,14 @@ of the maximum lambda.
 
 [Codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
 
-![GitHub Logo](/Figures/my_mean_auc.png)
+![GitHub Logo](/Figures/mean_auc2.png)
 
 ### GLINTERNET ROC of 5 Bootstrap Samples
 
-![GitHub Logo](/Figures/bs5_roc.png)
+![GitHub Logo](/Figures/bs_roc2.png)
+
+### Bootstrap Percentiles and Full Fit Coefficients
+
+codes here
+
+![GitHub Logo](/Figures/boostrap_percentiles.png)
