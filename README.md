@@ -46,6 +46,6 @@ of the maximum lambda.
 
 ### Bootstrap Percentiles and Full Fit Coefficients
 
-codes here
+[Codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code6_extractcoefs_analysis.R)
 
 ![GitHub Logo](/Figures/boostrap_percentiles.png)
