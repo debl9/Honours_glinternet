@@ -22,8 +22,9 @@ Y <- varhandle::unfactor(Y)
 
 # GLINTERNET Full data fit to obtain lambda sequence
 full_glint <- function (X, numLevels) {
-  fit <- glinternet::glinternet(X, Y, numLevels = numLevels, nLambda = 20,
-                                family = "binomial", verbose = T)
+  lambdas <- seq(4.054642e-05, 4.054642e-07, length.out = 20)
+  fit <- glinternet::glinternet(X, Y, numLevels = numLevels, nLambda = 20, 
+                                lambda = lambdas, family = "binomial", verbose = T)
   return(fit)
 }
 
