@@ -48,4 +48,4 @@ of the maximum lambda.
 
 [Codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code6_extractcoefs_analysis.R)
 
-![GitHub Logo](/Figures/bootstrap_percentiles.png)
+![Percentiles](/Figures/bootstrap_percentiles.png)
