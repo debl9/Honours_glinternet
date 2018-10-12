@@ -112,6 +112,27 @@ ggroc(list(roc_list[[1]], roc_list[[2]], roc_list[[3]], roc_list[[4]], roc_list[
   ggtitle("Bootstrapped Samples ROC")
 
 
+# ROC Analysis ------------------------------------------------------------
+
+l = 19 # optimal lambda in sequence
+roc_list <- list()
+for (i in 1:50) {
+  roc_list[[i]] = roc_samps(i, output, l)
+}
+
+
+cl <- parallel::makeCluster(parallel::detectCores())
+doParallel::registerDoParallel(cl)
+library(foreach)
+roc_stats <- foreach::foreach(b=1:50) %dopar% {
+  pROC::coords(roc_list[[b]], x = seq(0.1, 0.9, by = 0.1), ret = c("accuracy", "ppv", "npv"))
+}
+parallel::stopCluster(cl)
+
+# Produce dataframe of the average accuracy, positive predictive value, 
+# negative predictive value
+Reduce("+", roc_stats)/50
+
 # SAVE --------------------------------------------------------------------
 
 # save(auc_lambda_results, file = "auc_lambda_results.rda")
