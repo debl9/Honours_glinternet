@@ -47,6 +47,7 @@ of the maximum lambda.
 ### Significant Variables selected via GLINTERNET
 
 For the full table of [coefficients](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/full_coefs.csv).
+Below is a snipped of the significantly large main effects and interactions with magnitude exceeding 0.05.
 
 - Main Effects
 
@@ -57,4 +58,5 @@ For the full table of [coefficients](https://github.com/debl9/Honours_glinternet
 ![Interactions](/Figures/interaction_effects.PNG)
 
 - Mean Cross Entropy
+
 ![mean_cross_entropy](/Figures/mean_cross_entropy.png)
