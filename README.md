@@ -11,13 +11,7 @@ Codes for data cleaning, imputation and structuring it into continuous and categ
 
 [Data wrangling codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code1_data_wrangling.R)
 
-## 2. VIF 
-Variance inflation factor (VIF) was utilised to detect multicollinearity in the dataset amongst the continuous
-variable and reduce the dimensions of the dataset. 
-
-[VIF codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code2_vif.R)
-
-## 3. GLMNET 
+## 2. GLMNET 
 Applied generalised lasso regularisation to the the subset dataset, to select the significant main effect 
 variables.
 
@@ -25,12 +19,12 @@ variables.
 
 ![GitHub Logo](/Figures/glmnet_lasso.png)
 
-## 4. GLINTERNET
+## 3. GLINTERNET
 We used this package to fit a logistic model with overlapping group lasso to uncover underlying interactions.
 
 [GLINTERNET variable selection/bootstrapping](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
 
-## 5. Analysis 
+## 4. Analysis 
 ### Mean AUC
 
 For each value of lambda's, we observe the mean AUC (area under the ROC). We select the lambda within 1 standard error
@@ -63,4 +57,4 @@ For the full table of [coefficients](https://github.com/debl9/Honours_glinternet
 ![Interactions](/Figures/interaction_effects.PNG)
 
 - Mean Cross Entropy
-![mean cross entropy](/Figures/mean_cross_entropy.PNG)
+![mean_cross_entropy](/Figures/mean_cross_entropy.png)
