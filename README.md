@@ -17,7 +17,7 @@ variables.
 
 [GLMNET codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code3_glmnet.R)
 
-![GitHub Logo](/Figures/glmnet_lasso.png)
+![GitHub Logo](/Figures/plot_glmnet_lasso.png)
 
 ## 3. GLINTERNET
 We used this package to fit a logistic model with overlapping group lasso to uncover underlying interactions.
