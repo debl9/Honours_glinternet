@@ -131,7 +131,20 @@ parallel::stopCluster(cl)
 
 # Produce dataframe of the average accuracy, positive predictive value, 
 # negative predictive value
-Reduce("+", roc_stats)/50
+# Reduce("+", roc_stats)/50
+
+roc_df = melt(roc_stats)
+colnames(roc_df) = c("measure", "cutoff_prob", "value", "list")
+roc_df$measure = factor(roc_df$measure)
+roc_df$cutoff_prob = factor(roc_df$cutoff_prob)
+roc_df2 = roc_df[, 1:3]
+library(dplyr)
+roc_df2 %>% 
+  dplyr::group_by(cutoff_prob, measure) %>% 
+  dplyr::summarise(mean = mean(value, na.rm = T))-> roc_df3
+
+# Table Summary of ROC analysis
+View(reshape2::dcast(roc_df3, measure ~ cutoff_prob))
 
 # SAVE --------------------------------------------------------------------
 

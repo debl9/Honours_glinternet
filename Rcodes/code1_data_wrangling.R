@@ -89,7 +89,7 @@ X3$CLOSED_DATE <- as.Date(X3$CLOSED_DATE, "%d%b%Y")
 X3$DEFAULT_FLAG <- westpac1$DEFAULT_FLAG
 
 # Select observations that have been APPROVE[D]
-X3A <- dplyr::filter(X3, Final_Decision_Summary == "APPROVE")
+X3A <- dplyr::filter(X3, Final_Decision_Summary == "APPROVE" & !is.na(OPENED_DATE))
 
 # Observe the number of NA in dataset
 cleandata::inspect_na(X3A)/nrow(X3A)

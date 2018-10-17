@@ -3,7 +3,6 @@
 # load libraries
 
 library(glmnet)
-load("vif.rda")
 
 # FITTING GLMNET MODEL ----------------------------------------------------
 X_glmnet <- data.matrix(designX3)
@@ -30,13 +29,11 @@ cvfit <- function (X,Y, df){
 
 # Evaluate effectiveness of VIF
 fullcv <- cvfit(data.matrix(designX), Y, df = length(designX)) 
-vifcv <- cvfit(X_glmnet, Y, df = length(X_glmnet)) 
 cv23 <- cvfit(data.matrix(designX), Y, df = 23)
 
 
 # MATRIX WITH ONLY MAIN EFFECTS (ME) --------------------------------------
 
-vifglmnet.matrix <- dplyr::select(designX3, vifcv$main.effects[-1])
 glmnet.matrix <- dplyr::select(designX, vif$main.effects[-1])
 
-save(fullcv, vifcv, cv23, vifglmnet.matrix, glmnet.matrix, file = "vif_glmnet.rda")
+save(fullcv, cv23, glmnet.matrix, file = "vif_glmnet.rda")

@@ -8,7 +8,6 @@ load("model_data2.rda")
 load("vif_glmnet.rda")
 
 # Convert categorical variables, dataframe to matrix required for GLINTERNET
-vifglmnet.matrix2 <- data.matrix(varhandle::unfactor(vifglmnet.matrix))
 glmnet.matrix2 <- data.matrix(varhandle::unfactor(glmnet.matrix))
 
 # Selecting the numLevels argument in GLINTERNET
@@ -23,7 +22,7 @@ Y <- varhandle::unfactor(Y)
 # GLINTERNET Full data fit to obtain lambda sequence
 full_glint <- function (X, numLevels) {
   lambdas <- seq(4.054642e-05, 4.054642e-07, length.out = 20)
-  fit <- glinternet::glinternet(X, Y, numLevels = numLevels, nLambda = 20, 
+  fit <- glinternet::glinternet(X, Y, numLevels = numLevels, nLambda = 20, tol=1e-04,
                                 lambda = lambdas, family = "binomial", verbose = T)
   return(fit)
 }
@@ -43,7 +42,7 @@ bootglinternet <- function (X, Y, numLevels, B=50, nLambdas=20, maxLambda=4.0546
     bootsamps <- sample(x = 1:n, size = n, replace = TRUE)
     fit <- glinternet::glinternet(X = X[bootsamps,], Y = Y[bootsamps],
                                   lambda = lambdas, numLevels = numLevels, 
-                                  family = "binomial",
+                                  family = "binomial", tol=1e-04,
                                   nLambda = nLambdas, verbose = T)
     notbootsamps <- (1:n)[!(1:n) %in% bootsamps]
     ypred <- predict(fit, X = X[notbootsamps,], type = "link")
