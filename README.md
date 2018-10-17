@@ -43,7 +43,7 @@ of the maximum lambda.
 
 [Codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code6_extractcoefs_analysis.R)
 
-![Percentiles](/Figures/bootstrap_percentiles.PNG)
+![Percentiles](/Figures/glint_bootstrap_percentiles.png)
 
 ### Significant Variables selected via GLINTERNET
 
