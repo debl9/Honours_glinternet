@@ -51,8 +51,8 @@ Below is a snippet of the significantly large main effects and interactions with
 
 - Main Effects
 
-![main_effects](/Figures/main_effects.PNG)
+![main_effects](/Figures/glint_main_effects.png)
 
 - Interaction Effects
 
-![Interactions](/Figures/interaction_effects.PNG)
+![Interactions](/Figures/glint_interaction_effects.png)
