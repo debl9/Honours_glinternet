@@ -1,5 +1,4 @@
-# Appendix for Honours Project: GLINTERNET - A regularised approach to identify significant variables and interactions in personal
-loan data.
+# Honours Project Appendix: GLINTERNET - A regularised approach to identify significant variables and interactions in personal loan data.
 
 ## Introduction
 This page contains the supporting content in my Honours statistics thesis regarding hierarchical group-lasso 
