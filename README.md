@@ -33,7 +33,7 @@ of the maximum lambda.
 
 [Codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code4_glinternet.R)
 
-![GitHub Logo](/Figures/mean_auc2.png)
+![GitHub Logo](/Figures/glint_mean_auc.png)
 
 ### GLINTERNET AUC of ROC for 5 Bootstrap Samples
 
