@@ -1,4 +1,4 @@
-# Appendix for Honours Project: A regularised approach to identify significant variables and interactions in personal
+# Appendix for Honours Project: GLINTERNET - A regularised approach to identify significant variables and interactions in personal
 loan data.
 
 ## Introduction
@@ -57,7 +57,3 @@ Below is a snippet of the significantly large main effects and interactions with
 - Interaction Effects
 
 ![Interactions](/Figures/interaction_effects.PNG)
-
-- Mean Cross Entropy
-
-![mean_cross_entropy](/Figures/mean_cross_entropy.png)
