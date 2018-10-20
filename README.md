@@ -46,7 +46,7 @@ of the maximum lambda.
 
 ### Significant Variables selected via GLINTERNET
 
-For the full table of [coefficients](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/full_coefs.csv).
+For the full table of [coefficients](https://github.com/debl9/Honours_glinternet/blob/master/full_coefs.csv).
 Below is a snippet of the large main effects and interactions that has coefficients exceeding 0.05 in magnitude.
 
 - Main Effects
@@ -57,7 +57,9 @@ Below is a snippet of the large main effects and interactions that has coefficie
 
 ![Interactions](/Figures/glint_interaction_effects.png)
 
-### Optimal Threshold Cutoff 
+### ROC Analysis for GLINTERNET and its Optimal Threshold Cutoff 
+
+[ROC Analysis Table](https://github.com/debl9/Honours_glinternet/blob/master/roc_table.csv)
 
 Based on our loss function C = (1-p)a(1-specificity) + pb(1-sensitivity), the optimal threshold is 0.09. 
 
