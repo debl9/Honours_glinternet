@@ -60,7 +60,7 @@ pROC::coords(rocval, x = "best", ret = c("accuracy", "ppv", "npv",
 # a = cost of a false positive (i.e. non defaulter classified as defaulter)
 # b = cost of a false negative (i.e. defaulter classified as non-defaulter)
 a = 1
-b = 5 # cost of missing a default
+b = 10 # cost of missing a default
 p = sum(predvstrue_df$Y.notbootsamps.)/(length(predvstrue_df$Y.notbootsamps.))
 
 # Calculate the expected loss between false positive/false negative 
@@ -69,6 +69,7 @@ p = sum(predvstrue_df$Y.notbootsamps.)/(length(predvstrue_df$Y.notbootsamps.))
 expected_loss <- (1-p)*a*(1-roctable1[5,]) + p*b*(1-roctable1[4,])
 expected_loss_df <- data.frame(expected_loss, highlight = ifelse(expected_loss == min(expected_loss), T , F))
 
+library(ggplot2)
 qplot(seq(0.01, 0.9, 0.01), expected_loss) +
   xlab("Cutoff Thresholds") +
   ylab("Expected Loss Values") +

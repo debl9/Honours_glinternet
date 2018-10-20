@@ -61,4 +61,6 @@ Below is a snippet of the large main effects and interactions that has coefficie
 
 Based on our loss function C = (1-p)a(1-specificity) + pb(1-sensitivity), the optimal threshold is 0.09. 
 
+[Codes](https://github.com/debl9/Honours_glinternet/blob/master/Rcodes/code8_roc_analysis.R)
+
 ![min_loss](/Figures/expected_loss_function.jpeg)
