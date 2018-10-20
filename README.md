@@ -34,9 +34,9 @@ of the maximum lambda.
 
 ![GitHub Logo](/Figures/glint_mean_auc.png)
 
-### GLINTERNET AUC of ROC for 5 Bootstrap Samples
+### ROC Comparisons for 3 Regularised Models
 
-![GitHub Logo](/Figures/bs_roc2.png)
+![GitHub Logo](/Figures/bootstrap_models_rocs.png)
 
 ### Bootstrap Percentiles and Full Fit Coefficients
 
@@ -56,3 +56,9 @@ Below is a snippet of the large main effects and interactions that has coefficie
 - Interaction Effects
 
 ![Interactions](/Figures/glint_interaction_effects.png)
+
+### Optimal Threshold Cutoff 
+
+Based on our loss function C = (1-p)a(1-specificity) + pb(1-sensitivity), the optimal threshold is 0.09. 
+
+![min_loss](/Figures/expected_loss_function.jpeg)
