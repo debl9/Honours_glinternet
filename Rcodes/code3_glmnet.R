@@ -3,9 +3,14 @@
 # load libraries
 
 library(glmnet)
+load("model_data.rda")
+
 
 # FITTING GLMNET MODEL ----------------------------------------------------
-X_glmnet <- data.matrix(designX3)
+# Separate into categorical and continuous variables
+designX <- cbind(X_approved[, -which(names(X_approved) %in% colnames(X_categ4))], X_categ4)
+
+X_glmnet <- data.matrix(designX)
 
 full.glmnet.fit <- glmnet::glmnet(X_glmnet, as.factor(Y), alpha = 1, family = "binomial",
                                   type.multinomial = "grouped")
@@ -27,12 +32,12 @@ cvfit <- function (X,Y, df){
               cvbeta = cvbeta, main.effects = main.effects))
 }
 
-# Evaluate effectiveness of VIF
+# Compare the glmnet cross validation results of unconstrained and constrained 
 fullcv <- cvfit(data.matrix(designX), Y, df = length(designX)) 
 cv23 <- cvfit(data.matrix(designX), Y, df = 23)
 
 
-# MATRIX WITH ONLY MAIN EFFECTS (ME) --------------------------------------
+# MATRIX WITH ONLY MAIN EFFECTS -------------------------------------------
 
 glmnet.matrix <- dplyr::select(designX, vif$main.effects[-1])
 
