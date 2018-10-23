@@ -205,8 +205,7 @@ all_bootstrap_coefsdf <- rbind(sigcatcatEff2, sigcontcontEff2, sigcatcontEff2,
 new_all_bootstrap_coefsdf <- dplyr::arrange(all_bootstrap_coefsdf, desc(abs(mean)))
 
 # Full fit ----------------------------------------------------------------
-load("full_glint_new2.rda")
-rm(vifglm_glint, vifglm_glint2)
+load("full_glint_new.rda")
 
 full_fit_coef <- coef(glm_glint)[[19]]
 
