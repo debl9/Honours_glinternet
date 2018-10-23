@@ -1,7 +1,7 @@
 
 # Average AUC -------------------------------------------------------------
 
-# This script contains the codes to calculate the AUC from the glinternet
+# This script contains the codes to calculate the mean AUC from the glinternet
 # bootstrapped samples
 
 
@@ -77,7 +77,7 @@ l_1se <- min(which(auc_lambda_results$mean_auc_per_lambda > target))
 
 auc_lambda_results[l_1se,]
 
-# Plotting the AUC vs log(lambda)
+# Plotting the mean AUC vs log(lambda)
 ggplot(auc_lambda_results, aes(x = log_lambda, y = mean_auc_per_lambda)) +
   geom_errorbar(aes(ymin=mean_auc_per_lambda-sd, ymax=mean_auc_per_lambda+sd), 
                 width=.1, col = "blue") +

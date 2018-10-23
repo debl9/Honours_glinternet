@@ -106,7 +106,7 @@ quantile_update <- function (x, n, p){quantile(c(x, integer(n)), p)}
 
 # Extract Signicant Variables
 B = 50
-# Categorical main effects
+# Categorical main effects table
 catEffTable %>% 
   group_by(catEffect, level) %>% 
   summarise(CIlo = quantile_update(value, B-length(value), p = 0.05),
@@ -118,7 +118,7 @@ catEffTable %>%
   mutate(id=paste(catNames[catEffect], level, sep="_")) %>% 
   arrange(desc(abs(mean))) -> sigcatEff
 
-# Continuous main effects
+# Continuous main effects table
 contEffTable %>% 
   group_by(contEffect) %>% 
   summarise(CIlo = quantile_update(value, B-length(value), p = 0.05),
@@ -130,8 +130,8 @@ contEffTable %>%
   mutate(id = paste(contNames[contEffect])) %>% 
   arrange(desc(abs(mean))) -> sigcontEff
 
-# Interactions
-# Continuous x Continuous
+# Interactions Tables
+# Continuous x Continuous interactions
 
 contcontInterTable %>% 
   group_by(contEffect1, contEffect2) %>% 
@@ -146,7 +146,7 @@ contcontInterTable %>%
          id = paste(id1, id2, sep=" x ")) %>% 
   arrange(desc(abs(mean))) -> sigcontcontEff
 
-# Categorical x Categorical
+# Categorical x Categorical interactions
 
 catcatInterTable %>% 
   group_by(catEffect1, catEffect2, level1, level2) %>% 
@@ -161,7 +161,7 @@ catcatInterTable %>%
          id = paste(id1, id2, sep = " x ")) %>% 
   arrange(desc(abs(mean))) -> sigcatcatEff
 
-# Categorical x Continuous
+# Categorical x Continuous interactions
 
 catcontInterTable %>% 
   group_by(catEffect, contEffect, level) %>% 

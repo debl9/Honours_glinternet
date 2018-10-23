@@ -59,7 +59,7 @@ visIgraph(g3) %>%
 # Plotting the size of interactions ---------------------------------------
 
 library(corrplot)
-# Function to plot the individual categorical interactions
+# Function to plot the individual categorical x categorical  interactions
 catpairint_plots <- function (num1, num2) {
   subcatcat1 <- dplyr::filter(catcat2, catEffect1 == num1 & catEffect2 == num2)
   subcatcat1 %>% 
@@ -78,20 +78,19 @@ catpairint_plots(2, 6)
 catpairint_plots(3,4)
 # DRIVERS_LICENCE_IND_2, SECURED_LOAN_PURPOSE (4,6)
 catpairint_plots(4,6)
-catpairint_plots(3,6) #flip
+catpairint_plots(3,6)
 # NUM_APPS, LN_PROTECTION_INS_IND
 catpairint_plots(2,5)
 catpairint_plots(2,3) 
 # NUM_EXIST_WBC_ACCTS, DRIVERS_LICENCE_IND (3,4)
 catpairint_plots(3,4)
-catpairint_plots(3,5) # flip
-catpairint_plots(1,5) # maybe not include
+catpairint_plots(3,5) 
 catpairint_plots(5,7) 
 catpairint_plots(1,3)
 catpairint_plots(4,5)
 catpairint_plots(2,7)
 
-# Continuous x continuous
+# Continuous x continuous interactions
 
 contcont2 %>% 
   arrange(contEffect1, contEffect2) -> contcont3

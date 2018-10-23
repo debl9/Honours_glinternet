@@ -7,8 +7,6 @@
 
 library(pROC)
 load(file = "bootstrapped_glint.rda")   # glinternet bootstraps
-load(file = "bootstrapped_lasso.rda")   # lasso bootstraps
-load(file = "bootstrapped_ridge.rda")   # ridge bootstraps
 
 boot_slice <- function (o) {
   ypred <- o$ypred
@@ -33,8 +31,7 @@ predvstrue <- function (bs, opred, l) {
   return(best_df) 
 }
 
-# Choose the optimal lambda from our results to be 'l'
-# l=19 (glinternet), l=5 (lasso), l=19 (ridge)
+# Choose the optimal lambda from our glinternet results to be 'l=19'
 l=19
 cl <- parallel::makeCluster(parallel::detectCores())
 doParallel::registerDoParallel(cl)
@@ -45,18 +42,17 @@ predvstrue_df <- foreach::foreach(bs=1:B, .combine = "rbind") %dopar% {
 parallel::stopCluster(cl)
 
 
-# AUC Tables --------------------------------------------------------------
+# AUC Table ---------------------------------------------------------------
 rocval <- pROC::roc(predvstrue_df$Y.notbootsamps., predvstrue_df$ypred)
 roctable1 <- pROC::coords(rocval, x = seq(0.01,0.9,0.01), ret = c("accuracy", "ppv", "npv",
                                                                   "sensitivity", "specificity"))
-roctable2 <- pROC::coords(rocval, x = seq(0.01,0.1,0.01), ret = c("accuracy", "ppv", "npv",
-                                                               "sensitivity", "specificity"))
 
 pROC::coords(rocval, x = "best", ret = c("accuracy", "ppv", "npv",
                                                    "sensitivity", "specificity",
                                                    "threshold"))
 
 # Calculate Optimal Cutoff Threshold --------------------------------------
+# C = (1-p)*a*(1-specificity) + p*b*(1-sensitivity)
 # a = cost of a false positive (i.e. non defaulter classified as defaulter)
 # b = cost of a false negative (i.e. defaulter classified as non-defaulter)
 a = 1
@@ -64,7 +60,6 @@ b = 10 # cost of missing a default
 p = sum(predvstrue_df$Y.notbootsamps.)/(length(predvstrue_df$Y.notbootsamps.))
 
 # Calculate the expected loss between false positive/false negative 
-# (1-p)*a*(1-specificity) + p*b*(1-sensitivity)
 
 expected_loss <- (1-p)*a*(1-roctable1[5,]) + p*b*(1-roctable1[4,])
 expected_loss_df <- data.frame(expected_loss, highlight = ifelse(expected_loss == min(expected_loss), T , F))

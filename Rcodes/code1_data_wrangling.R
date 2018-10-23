@@ -20,7 +20,7 @@ extract.date <- function(data) {
   return(as.Date(new.date2, "%d%b%Y"))
 }
 
-# Function to eplace with missing values
+# Function to replace with missing values
 replace_99NA <- function(data) {
   data[data == "99"] <- NA
   data[data == "999"] <- NA
@@ -144,13 +144,12 @@ X_impute_final$NUM_OTH_FIN_INSTITUTE_ACCTS <- X_out_impute$NUM_OTH_FIN_INSTITUTE
 X_impute_final2 <-X_impute_final
 
 # CONTINUOUS/CATEGORICAL STRUCTURE ----------------------------------------
-# This section of code re-structures the data into a form that 
-# required for the GLINTERNET package
+# This section of code re-structures the data into a form that is required for GLINTERNET 
 
 Y <- X_impute_final2$DEFAULT_FLAG
 X_impute_final2 <- dplyr::select(X_impute_final2, -DEFAULT_FLAG)
 
-# separate continous and categorical columns
+# separate continuous and categorical columns
 colnums <- unlist(lapply(X_impute_final2, is.factor))
 X_categ <- X_impute_final2[, colnums] 
 X_cont <- X_impute_final2[, which(colnums == F)]
