@@ -51,3 +51,4 @@ bootridge <- function (X, Y, numLevels, B=50, nLambdas=20, maxLambda=22.94836874
 bootridge(glmnet.matrix2, Y, nLambdas=20, maxLambda=22.948368741, 
           minLambda=0.002294837, n = nrow(glmnet.matrix2))
 
+# Obtain the mean auc tables by running the R-script "code5_AvgAUC.R"

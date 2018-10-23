@@ -82,69 +82,8 @@ ggplot(auc_lambda_results, aes(x = log_lambda, y = mean_auc_per_lambda)) +
   geom_errorbar(aes(ymin=mean_auc_per_lambda-sd, ymax=mean_auc_per_lambda+sd), 
                 width=.1, col = "blue") +
   geom_point() +
-  geom_vline(xintercept = c(-12.28277, -12.89199), linetype = "dotted") +
+  geom_vline(xintercept = c(-12.510631, -14.336877), linetype = "dotted") +
   ggtitle('Mean AUC')
-
-
-# ROC of bootstraps -------------------------------------------------------
-# 5 bootstrap samples examples
-samps <- sample(1:50, 5, replace = F)
-output_samps <- output[samps]
-# Lambda within 1se of the max
-l = 18
-
-roc_samps <- function (bs, opred, l) {
-  notbootsamps <- opred[[bs]]$notbootsamps
-  ypred <- opred[[bs]]$ypred[,l] # ignore NAs, ypred for each lambda value
-  ypred <- exp(ypred)/(1+exp(ypred)) # Transform to obtain probability of default
-  ROC_out <- pROC::roc(response = as.factor(Y[notbootsamps]), predictor = ypred)
-  return(ROC_out) # AUC for each lambda
-}
-roc_list <- list()
-for (i in 1:length(samps)) {
-  roc_list[[i]] = roc_samps(i, output_samps, l)
-}
-
-ggroc(list(roc_list[[1]], roc_list[[2]], roc_list[[3]], roc_list[[4]], roc_list[[5]]),
-      legacy.axes = TRUE) +
-  geom_abline(slope = 1, intercept = 0, linetype = 3) +
-  guides(color=guide_legend("Samples")) +
-  ggtitle("Bootstrapped Samples ROC")
-
-
-# ROC Analysis ------------------------------------------------------------
-
-l = 19 # optimal lambda in sequence
-roc_list <- list()
-for (i in 1:50) {
-  roc_list[[i]] = roc_samps(i, output, l)
-}
-
-
-cl <- parallel::makeCluster(parallel::detectCores())
-doParallel::registerDoParallel(cl)
-library(foreach)
-roc_stats <- foreach::foreach(b=1:50) %dopar% {
-  pROC::coords(roc_list[[b]], x = seq(0.1, 0.9, by = 0.1), ret = c("accuracy", "ppv", "npv"))
-}
-parallel::stopCluster(cl)
-
-# Produce dataframe of the average accuracy, positive predictive value, 
-# negative predictive value
-# Reduce("+", roc_stats)/50
-
-roc_df = melt(roc_stats)
-colnames(roc_df) = c("measure", "cutoff_prob", "value", "list")
-roc_df$measure = factor(roc_df$measure)
-roc_df$cutoff_prob = factor(roc_df$cutoff_prob)
-roc_df2 = roc_df[, 1:3]
-library(dplyr)
-roc_df2 %>% 
-  dplyr::group_by(cutoff_prob, measure) %>% 
-  dplyr::summarise(mean = mean(value, na.rm = T))-> roc_df3
-
-# Table Summary of ROC analysis
-View(reshape2::dcast(roc_df3, measure ~ cutoff_prob))
 
 # SAVE --------------------------------------------------------------------
 
