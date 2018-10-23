@@ -3,7 +3,8 @@
 ## Introduction
 This page contains the supporting content in my Honours statistics thesis regarding hierarchical group-lasso 
 regression and modelling pairwise interactions within a credit loan dataset. Included are all of the [R codes](https://github.com/debl9/Honours_glinternet/tree/master/Rcodes) 
-used in data cleaning, model building and analysis & the complete data dictionary ([part 1](https://github.com/debl9/Honours_glinternet/blob/master/data_dictionary1), [part 2]((https://github.com/debl9/Honours_glinternet/blob/master/data_dictionary2)). Outputs can be found in the folder 
+used in data cleaning, model building and analysis & the complete data dictionary [part 1](https://github.com/debl9/Honours_glinternet/blob/master/data_dictionary1), 
+[part 2]((https://github.com/debl9/Honours_glinternet/blob/master/data_dictionary2). Outputs can be found in the folder 
 [Figures](https://github.com/debl9/Honours_glinternet/tree/master/Figures). 
 
 ## 1. Data Wrangling 
