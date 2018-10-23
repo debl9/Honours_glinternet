@@ -39,6 +39,6 @@ cv23 <- cvfit(data.matrix(designX), Y, df = 23)
 
 # MATRIX WITH ONLY MAIN EFFECTS -------------------------------------------
 
-glmnet.matrix <- dplyr::select(designX, vif$main.effects[-1])
+glmnet.matrix <- dplyr::select(designX, cv23$main.effects[-1])
 
-save(fullcv, cv23, glmnet.matrix, file = "vif_glmnet.rda")
+save(fullcv, cv23, glmnet.matrix, file = "glmnet.rda")

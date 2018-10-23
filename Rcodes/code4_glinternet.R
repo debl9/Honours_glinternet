@@ -4,8 +4,7 @@
 # Load necessary files and libraries
 library(glinternet)
 library(varhandle)
-load("model_data2.rda")
-load("vif_glmnet.rda")
+load("glmnet.rda")
 
 # Convert categorical variables, dataframe to matrix required for GLINTERNET
 glmnet.matrix2 <- data.matrix(varhandle::unfactor(glmnet.matrix))
