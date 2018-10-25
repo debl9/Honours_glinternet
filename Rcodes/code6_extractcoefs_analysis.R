@@ -21,8 +21,8 @@ load("bootstrapped_glint.rda")
 
 # Obtains the names of variables ------------------------------------------
 
-catNames <- colnames(glmnet.matrix2)[12:18]
-contNames <- colnames(glmnet.matrix2)[1:11]
+catNames <- colnames(glmnet.matrix2)[14:20]
+contNames <- colnames(glmnet.matrix2)[1:13]
 
 # Functions to extract and reshape coefficient results --------------------
 
