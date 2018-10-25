@@ -47,7 +47,7 @@ of the maximum AUC because of our preference to underfit rather than overfit the
 
 ### Significant Variables selected via GLINTERNET
 
-For the full table of [coefficients](https://github.com/debl9/Honours_glinternet/blob/master/full_coefs.csv).
+For the full table of [coefficients](https://github.com/debl9/Honours_glinternet/blob/master/coefficients_table.csv).
 Below is a snippet of the large main effects and interactions that has coefficients exceeding 0.05 in magnitude.
 
 - Main Effects
